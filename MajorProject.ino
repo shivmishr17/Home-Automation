@@ -1,6 +1,8 @@
-//Bluetooth
-#define BLYNK_PRINT Serial
+// Use blynk app for support in mobile app. 
 
+//Bluetooth
+
+#define BLYNK_PRINT Serial
 
 #include <SoftwareSerial.h>
 SoftwareSerial SwSerial(10, 11); // RX, TX
@@ -10,7 +12,7 @@ SoftwareSerial SwSerial(10, 11); // RX, TX
 
 // You should get Auth Token in the Blynk App.
 // Go to the Project Settings (nut icon).
-char auth[] = "66df23f89c9944deb50a80f5971bfa0b";
+char auth[] = "The Code you get from your Blynk App";
 
 SoftwareSerial SerialBLE(7, 8); // RX, TX
 
@@ -21,30 +23,6 @@ WidgetTerminal terminal(V1);
 
 int op = 0;
 int pinValue = 0;
-
-
-BLYNK_WRITE(V1)
-{
-
-  terminal.print(op);
-  terminal.println("%");
-  // if you type "Marco" into Terminal Widget - it will respond: "Polo:"
-  if (String("Marco") == param.asStr()) {
-    terminal.println("You said: 'Marco'") ;
-    terminal.println("I said: 'Polo'") ;
-  } else {
-
-    // Send it back
-    terminal.print("You said:");
-    terminal.write(param.getBuffer(), param.getLength());
-    terminal.println();
-  }
-
-  // Ensure everything is sent
-  terminal.flush();
-}
-
-
 
 //Water level
 const int trigPin = 2;
@@ -78,14 +56,6 @@ void setup() {
   Blynk.begin(SerialBLE, auth);
 
   Serial.println("Waiting for connections...");
-
-//  // This will print Blynk Software version to the Terminal Widget when
-//  // your hardware gets connected to Blynk Server
-//  terminal.println(F("Blynk v" BLYNK_VERSION ": Device started"));
-//  terminal.println(F("-------------"));
-//  terminal.println(F("Type 'Marco' and get a reply, or type"));
-//  terminal.println(F("anything else and get it printed back."));
-//  terminal.flush();
 
 }
 void loop() {
@@ -152,11 +122,4 @@ void loop() {
 
   //bluetooth end
 
-
-  //  Serial.print("LDR:>>>");
-  //  Serial.println(ldrVal);
-
-  //  terminal.print(ldrVal);
-  //  terminal.println();
-  //  terminal.flush();
 }
